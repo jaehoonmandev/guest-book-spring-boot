@@ -11,11 +11,13 @@ public interface GuestBookService {
     GuestBook save(GuestBook guestBook);
 
     List<GuestBook> getAllGuestBooks(String orderDirection, String orderField);
+    List<GuestBook> getGuestBookByWriter(String orderDirection, String orderField, String writer);
 
     //List<GuestBook> getAllGuestBooks();
 
     GuestBook getGuestBookById(String id);
 
     void deleteGuestBookById(String id);
+
 
 }

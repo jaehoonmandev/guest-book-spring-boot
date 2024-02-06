@@ -19,14 +19,33 @@ public class GuestBookController {
         this.guestBookService = guestBookService;
     }
 
-    //GET HTTP 메서드로 모든 데이터 읽어오기.
+    /**
+     * 모든 데이터를 가져온다.
+     * @param orderDirection : DESC, ASC
+     * @param orderField : 정렬 기준 필드
+     * @return : List<GuestBook>
+     */
     @GetMapping
     public List<GuestBook> getAllGuestBook(
-            @RequestParam(name = "orderDirection", required = false) String orderDirection,
-            @RequestParam(name = "orderField", required = false) String orderField
-    ){
-        //return guestBookService.getAllGuestBooks();
+            @RequestParam(name = "orderDirection") String orderDirection,
+            @RequestParam(name = "orderField") String orderField) {
+
         return guestBookService.getAllGuestBooks(orderDirection,orderField);
+    }
+
+    /**
+     * 검색한 작성자의 데이터를 가져온다.
+     * @param orderDirection : DESC, ASC
+     * @param orderField : 정렬 기준 필드
+     * @param writer : 작성자 필터링
+     * @return : List<GuestBook>
+     */
+    @GetMapping("/search")
+    public List<GuestBook> getGuestBookByWriter(
+            @RequestParam(name = "orderDirection") String orderDirection,
+            @RequestParam(name = "orderField") String orderField,
+            @RequestParam(name = "writer") String writer){
+        return guestBookService.getGuestBookByWriter(orderDirection,orderField,writer);
     }
 
     //GET HTTP 메서드로 id에 해당하는 데이터 읽어오기.
@@ -50,6 +69,7 @@ public class GuestBookController {
             updateGuestBook.setTitle(guestBook.getTitle());
             updateGuestBook.setWriter(guestBook.getWriter());
             updateGuestBook.setContents(guestBook.getContents());
+            updateGuestBook.setColor(guestBook.getColor());
         }
 
         return guestBookService.save(updateGuestBook);

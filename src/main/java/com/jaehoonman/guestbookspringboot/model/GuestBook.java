@@ -17,6 +17,7 @@ public class GuestBook {
     private String writer;
     private String contents;
     private String permitCode;
+    private String color;
 
     private Date createdTime = new Date();
 }

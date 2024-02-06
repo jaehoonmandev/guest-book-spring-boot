@@ -24,13 +24,6 @@ public class GuestBookImpl implements GuestBookService {
         return this.guestBookRepository.save(guestBook);
     }
 
-    /*@Override
-    public List<GuestBook> getAllGuestBooks() {
-        Sort sort = Sort.by(Sort.Direction.ASC, "fieldName");
-        return this.guestBookRepository.findAll(sort);
-        //return this.guestBookRepository.findAll();
-    }*/
-
     @Override
     public List<GuestBook> getAllGuestBooks(String orderDirection, String orderField) {
 
@@ -45,6 +38,22 @@ public class GuestBookImpl implements GuestBookService {
         return this.guestBookRepository.findAll(sort);
         //return this.guestBookRepository.findAll();
     }
+
+    @Override
+    public List<GuestBook> getGuestBookByWriter(
+            String orderDirection, String orderField, String writer){
+        //TODO : sort 위치 정하는 로직은 나중에 하나로 합치기
+        Sort.Direction sortDirection = Sort.Direction.DESC;
+
+        if(orderDirection.equals("ASC")){
+            sortDirection = Sort.Direction.ASC;
+        }
+
+        Sort sort = Sort.by(sortDirection, orderField);
+
+        return this.guestBookRepository.findGuestBooksByWriter(sort, writer);
+    }
+
 
     @Override
     public GuestBook getGuestBookById(String id){
