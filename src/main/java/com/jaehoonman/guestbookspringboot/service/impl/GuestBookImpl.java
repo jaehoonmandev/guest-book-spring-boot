@@ -5,6 +5,7 @@ import com.jaehoonman.guestbookspringboot.repository.GuestBookRepository;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,11 @@ import java.util.List;
 @Service
 public class GuestBookImpl implements GuestBookService {
 
+
     private final GuestBookRepository guestBookRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public GuestBookImpl(GuestBookRepository guestBookRepository){
@@ -21,14 +26,19 @@ public class GuestBookImpl implements GuestBookService {
 
     @Override
     public GuestBook save(GuestBook guestBook) {
+        //암호화하여 저장한다.
+        guestBook.setPermitCode(passwordEncoder.encode(guestBook.getPermitCode()));
+
         return this.guestBookRepository.save(guestBook);
     }
 
     @Override
     public List<GuestBook> getAllGuestBooks(String orderDirection, String orderField) {
 
+        //Data Sort에 정렬 위치를 제공한다.
         Sort.Direction sortDirection = Sort.Direction.DESC;
 
+        //기본 DESC에서 ASC로 설정이 되어있다면 ASC로 Sort.Direction을 변경한다.
         if(orderDirection.equals("ASC")){
             sortDirection = Sort.Direction.ASC;
         }
@@ -36,7 +46,7 @@ public class GuestBookImpl implements GuestBookService {
         Sort sort = Sort.by(sortDirection, orderField);
 
         return this.guestBookRepository.findAll(sort);
-        //return this.guestBookRepository.findAll();
+
     }
 
     @Override
@@ -61,8 +71,8 @@ public class GuestBookImpl implements GuestBookService {
     }
 
     @Override
-    public void deleteGuestBookById(String id) {
-        this.guestBookRepository.deleteById(id);
+    public int deleteGuestBookById(String id) {
+        return this.guestBookRepository.deleteById(id);
     }
 
 }

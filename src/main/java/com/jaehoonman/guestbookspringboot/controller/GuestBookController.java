@@ -20,7 +20,7 @@ public class GuestBookController {
     }
 
     /**
-     * 모든 데이터를 가져온다.
+     * 방명록 데이터를 Load한다.
      * @param orderDirection : DESC, ASC
      * @param orderField : 정렬 기준 필드
      * @return : List<GuestBook>
@@ -64,7 +64,10 @@ public class GuestBookController {
     @PutMapping("/{id}")
     public GuestBook updateGuestBook(@RequestBody GuestBook guestBook,@PathVariable String id) {
 
+        // 아이디에 해당하는 데이터를 찾고 존재한다면
         GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
+
+        // 수정할 데이터들만 입력 받은 데이터로 변경하여 저장한다.
         if (updateGuestBook != null) {
             updateGuestBook.setTitle(guestBook.getTitle());
             updateGuestBook.setWriter(guestBook.getWriter());

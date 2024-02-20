@@ -19,5 +19,5 @@ public interface GuestBookRepository extends MongoRepository<GuestBook, Long> {
     List<GuestBook> findGuestBooksByWriter(Sort sort, String writer);
 
 
-    void deleteById(String id);
+    int deleteById(String id);
 }

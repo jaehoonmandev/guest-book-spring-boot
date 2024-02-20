@@ -1,7 +1,9 @@
 package com.jaehoonman.guestbookspringboot.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -19,10 +21,9 @@ public class GuestBook {
     private String permitCode;
     private String color;
 
-    private Date createdTime = new Date();
+    @CreatedDate
+    private Date createdTime;
+
+    @LastModifiedDate
+    private Date lastModifiedTime;
 }
-
-
-//Document 생성 시 자동으로 생성 시간 저장.
-//사용 시 @EnableMongoAuditing or @EnableReactiveMongoAuditing 선언 필요
-//    @CreatedDate
