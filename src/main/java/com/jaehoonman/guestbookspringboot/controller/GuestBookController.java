@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/guestbook")
@@ -28,9 +29,11 @@ public class GuestBookController {
     @GetMapping
     public List<GuestBook> getAllGuestBook(
             @RequestParam(name = "orderDirection") String orderDirection,
-            @RequestParam(name = "orderField") String orderField) {
+            @RequestParam(name = "orderField") String orderField,
+            @RequestParam(name = "page") int page,
+            @RequestParam(name = "pageSize") int pageSize) {
 
-        return guestBookService.getAllGuestBooks(orderDirection,orderField);
+        return guestBookService.getAllGuestBooks(orderDirection,orderField,page,pageSize);
     }
 
     /**
@@ -44,8 +47,10 @@ public class GuestBookController {
     public List<GuestBook> getGuestBookByWriter(
             @RequestParam(name = "orderDirection") String orderDirection,
             @RequestParam(name = "orderField") String orderField,
-            @RequestParam(name = "writer") String writer){
-        return guestBookService.getGuestBookByWriter(orderDirection,orderField,writer);
+            @RequestParam(name = "writer") String writer,
+            @RequestParam(name = "page") int page,
+            @RequestParam(name = "pageSize") int pageSize){
+        return guestBookService.getGuestBookByWriter(orderDirection,orderField,writer,page,pageSize);
     }
 
     //GET HTTP 메서드로 id에 해당하는 데이터 읽어오기.
@@ -84,5 +89,17 @@ public class GuestBookController {
         guestBookService.deleteGuestBookById(id);
     }
 
+
+    /**
+     * 등록된 방명록의 Permit Code와 사용자가 입력한 Permit Code가 같은지 판단한다.
+     * @param id
+     * @return boolean
+     */
+    @RequestMapping("/checkPermitCode/{id}")
+    public boolean checkPermitCode(@PathVariable String id, @RequestBody GuestBook permitCode) {
+
+        return guestBookService.checkPermitCode(id, permitCode.getPermitCode());
+
+    }
 
 }

@@ -2,6 +2,7 @@ package com.jaehoonman.guestbookspringboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,8 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests(
                         (authz) -> authz
+                                .requestMatchers(HttpMethod.PUT, "/guestbook/").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/guestbook/").authenticated()
                                 .anyRequest().permitAll()
 
                 );
