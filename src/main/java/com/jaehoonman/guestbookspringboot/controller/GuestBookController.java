@@ -80,7 +80,7 @@ public class GuestBookController {
             updateGuestBook.setColor(guestBook.getColor());
         }
 
-        return guestBookService.save(updateGuestBook);
+        return guestBookService.modify(updateGuestBook);
     }
 
     //DELETE HTTP 메서드로 id에 해당하는 데이터 삭제하기.

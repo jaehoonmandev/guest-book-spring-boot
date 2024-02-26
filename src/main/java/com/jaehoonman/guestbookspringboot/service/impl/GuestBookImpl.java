@@ -25,11 +25,17 @@ public class GuestBookImpl implements GuestBookService {
         this.guestBookRepository = guestBookRepository;
     }
 
+    //데이터 처음 저장할 때
     @Override
     public GuestBook save(GuestBook guestBook) {
         //암호화하여 저장한다.
         guestBook.setPermitCode(passwordEncoder.encode(guestBook.getPermitCode()));
 
+        return this.guestBookRepository.save(guestBook);
+    }
+    //데이터 수정 시
+    @Override
+    public GuestBook modify(GuestBook guestBook){
         return this.guestBookRepository.save(guestBook);
     }
 

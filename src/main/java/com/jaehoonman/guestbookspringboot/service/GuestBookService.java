@@ -13,6 +13,9 @@ public interface GuestBookService {
     // 방명록 데이터 저장.
     GuestBook save(GuestBook guestBook);
 
+    //방명록 데이터 수정
+    GuestBook modify(GuestBook guestBook);
+
     //방명록 데이터 조회
     List<GuestBook> getAllGuestBooks(String orderDirection, String orderField, int page, int pageSize);
 
