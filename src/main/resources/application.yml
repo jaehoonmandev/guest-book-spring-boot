@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://jaehoonman:1234@localhost:27017/?authSource=admin
+      database: guest_book
