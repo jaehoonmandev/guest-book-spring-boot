@@ -19,6 +19,13 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://repo.spring.io/milestone/"
+    }
+}
+
+ext {
+    set('springCloudVersion', "2023.0.0")
 }
 
 dependencies {
@@ -28,11 +35,18 @@ dependencies {
 
     //implementation 'org.mongodb:mongodb-driver-sync:4.10.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('test') {
