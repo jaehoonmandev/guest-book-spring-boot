@@ -5,11 +5,17 @@ plugins {
 }
 
 group = 'com.jaehoonman'
-version = '0.0.1-SNAPSHOT'
+
+jar {
+    /*JAR 생성 시 plain 생성하지 않기.*/
+    enabled = false
+}
 
 java {
     sourceCompatibility = '17'
 }
+
+
 
 configurations {
     compileOnly {

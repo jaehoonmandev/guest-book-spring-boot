@@ -6,7 +6,7 @@ FROM openjdk:17
 LABEL maintainer='wido1593@gmail.com'
 
 # JAR 파일 경로 변수로 지정.
-ARG JAR_FILE=build/libs/guest-book-spring-boot-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=build/libs/*.jar
 
 # JAR 파일을 app.jar 라는 이름으로 사용하기 위해 복사.
 COPY ${JAR_FILE} app.jar
