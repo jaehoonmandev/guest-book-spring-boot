@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/guestbook")
+@RequestMapping("/api/guestbook")
 public class GuestBookController {
 
     //서비스 주입

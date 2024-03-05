@@ -4,6 +4,11 @@ spring:
 #      uri: mongodb://jaehoonman:1234@localhost:27017/?authSource=admin
       uri: mongodb://jaehoonman:1234@mongodb:27017/?authSource=admin
       database: guest_book
+
+
+server:
+  port: 8080
+
 #  application:
 #    name: GuestBook
 #  cloud:
@@ -15,4 +20,5 @@ spring:
 #      host: localhost
 #      port: 8200
 #  config:
+
 #    import: vault://
