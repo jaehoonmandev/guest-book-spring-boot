@@ -1,0 +1,26 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://jaehoonman:1234@localhost:27017/?authSource=admin
+      database: guest_book
+
+server:
+  port: 8080
+#  servlet:
+#    context-path: /guestbook
+#  servlet:
+#    context-path: /api
+
+#  application:
+#    name: GuestBook
+#  cloud:
+#    vault:
+#      token: 00000000-0000-0000-0000-000000000000
+#      scheme: http
+#      kv:
+#        enabled: true
+#      host: localhost
+#      port: 8200
+#  config:
+
+#    import: vault://
