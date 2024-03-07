@@ -1,6 +1,6 @@
 
 # 현재 애플리케이션이 구동되는 기반 이미지 버전 pull
-FROM openjdk:17
+FROM openjdk:17-slim
 
 # 작성자, 관리자 등의 정보를 나타낼 수 있다.
 LABEL maintainer='wido1593@gmail.com'

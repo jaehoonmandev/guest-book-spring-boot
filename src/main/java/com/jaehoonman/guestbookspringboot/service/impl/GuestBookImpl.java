@@ -3,6 +3,7 @@ package com.jaehoonman.guestbookspringboot.service.impl;
 import com.jaehoonman.guestbookspringboot.model.GuestBook;
 import com.jaehoonman.guestbookspringboot.repository.GuestBookRepository;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -10,9 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class GuestBookImpl implements GuestBookService {
+
 
 
     private final GuestBookRepository guestBookRepository;
@@ -72,7 +75,18 @@ public class GuestBookImpl implements GuestBookService {
 
         Sort sort = Sort.by(sortDirection, orderField);
 
-        return this.guestBookRepository.findGuestBooksByWriter(sort, writer);
+
+
+
+
+        List<GuestBook> result = this.guestBookRepository.findGuestBooksByWriter(PageRequest.of(page, pageSize, sort), writer);
+
+
+        return result;
+
+//        return this.guestBookRepository.findGuestBooksByWriter(
+//                PageRequest
+//                    .of(page, pageSize, sort), writer);
     }
 
 

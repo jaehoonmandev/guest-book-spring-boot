@@ -10,7 +10,7 @@ ARG JAR_FILE=build/libs/*.jar
 
 # JAR 파일을 app.jar 라는 이름으로 사용하기 위해 복사.
 COPY ${JAR_FILE} app.jar
-COPY src/main/resources/application.yml application.yml
+COPY src/main/resources/application-prod.yml application.yml
 
 EXPOSE 8082
 

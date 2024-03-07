@@ -18,7 +18,7 @@ public interface GuestBookRepository extends MongoRepository<GuestBook, Long> {
     List<GuestBook> findGuestBooksBy(Pageable pageable);
 
     //작성자를 기준으로 데이터를 가져온다.
-    List<GuestBook> findGuestBooksByWriter(Sort sort, String writer);
+    List<GuestBook> findGuestBooksByWriter(Pageable Pageable, String writer);
 
     int deleteById(String id);
 }
