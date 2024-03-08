@@ -3,7 +3,7 @@ services: # 컨테이너의 이름, 이미지, 포트 등을 정의하여 컨테
   app:
     build:
       context: .
-      dockerfile: Dockerfile.local
+      dockerfile: Dockerfile.prod
     container_name: guest-book-spring-boot # 생성될 컨테이너 이름 정의
     image: guest-book-spring-boot-local # 기반이 되는 이미지 지정
     ports:
