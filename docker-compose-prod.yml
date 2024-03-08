@@ -1,9 +1,6 @@
 version: "3" # Docker compose의 버전 선택
 services: # 컨테이너의 이름, 이미지, 포트 등을 정의하여 컨테이너 생성 및 관리
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.prod
     image: wido1593/guest-book-spring-boot:latest # 기반이 되는 이미지 지정
     container_name: guest-book-spring-boot # 생성될 컨테이너 이름 정의
     ports:
