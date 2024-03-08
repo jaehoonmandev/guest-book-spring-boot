@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: local
 ---
 spring:
   profiles:
@@ -8,4 +8,5 @@ spring:
 ---
 spring:
   profiles:
-    active: local
+    active: prod
+
