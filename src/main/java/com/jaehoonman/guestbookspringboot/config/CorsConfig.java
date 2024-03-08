@@ -14,11 +14,18 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*"
-                        ,"https://guestbook.jaehoonman.site/"
-                        ,"https://jaehoonman.site")
-                .allowedMethods("*",
-                        "GET","POST","DELETE")
+                .allowedOrigins(
+                        "*",
+                        "http://localhost:3000",
+                        "http://13.209.195.135:3000",
+                        "http://76.76.21.93",
+                        "https://guestbook.jaehoonman.site/",
+                        "https://jaehoonman.site")
+                .allowedMethods(
+                        "GET",
+                        "POST",
+                        "DELETE",
+                        "PUT")
                 .allowedHeaders("*")
                 .allowCredentials(false).maxAge(6000);
 
