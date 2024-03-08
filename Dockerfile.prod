@@ -5,6 +5,9 @@ FROM openjdk:17-slim
 # 작성자, 관리자 등의 정보를 나타낼 수 있다.
 LABEL maintainer='wido1593@gmail.com'
 
+#JAR 파일을 생성하기 위해 Gradle 빌드(CMD는 컨테이너가 실행되기 전)
+CMD ["./gradlew", "clean", "build"]
+
 # JAR 파일 경로 변수로 지정.
 ARG JAR_FILE=build/libs/*.jar
 
