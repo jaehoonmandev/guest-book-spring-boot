@@ -15,7 +15,7 @@ ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 COPY src/main/resources/application-prod.yml application.yml
 
-EXPOSE 18080
+EXPOSE 8080
 
 # JAR를 실행하기 위한 java -jar app.jar 명령어를 ENTRYPOINT로 설정
 ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=prod", "app.jar"]

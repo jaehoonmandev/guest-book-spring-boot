@@ -17,7 +17,7 @@ COPY ${JAR_FILE} app.jar
 COPY src/main/resources/application-local.yml application.yml
 
 #Docker Image를 8080으로 외부에 노출
-EXPOSE 8080
+EXPOSE 18080
 
 # JAR를 실행하기 위한 java -jar app.jar 명령어를 ENTRYPOINT로 설정(ENTRYPOINT는 컨테이너가 실행될 떄)
 ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=local", "app.jar"]
