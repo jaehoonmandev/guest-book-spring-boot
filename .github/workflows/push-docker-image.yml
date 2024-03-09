@@ -4,7 +4,7 @@ name: push-to-dockerhub(CI)
 on:
   push:
     branches:
-      - main
+      - master
 
 # 해당 action yml 파일을 runs-on에 해당하는 VM이 읽을 수 있도록 권한 설정.
 permissions:
