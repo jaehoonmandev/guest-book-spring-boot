@@ -5,7 +5,7 @@ spring:
       database: guest_book
 
 server:
-  port: 18080
+  port: 8080
 #  servlet:
 #    context-path: /guestbook
 #  servlet:

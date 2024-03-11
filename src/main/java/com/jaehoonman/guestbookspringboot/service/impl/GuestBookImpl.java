@@ -3,7 +3,7 @@ package com.jaehoonman.guestbookspringboot.service.impl;
 import com.jaehoonman.guestbookspringboot.model.GuestBook;
 import com.jaehoonman.guestbookspringboot.repository.GuestBookRepository;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
+
 
 @Service
 public class GuestBookImpl implements GuestBookService {
@@ -42,21 +42,12 @@ public class GuestBookImpl implements GuestBookService {
         return this.guestBookRepository.save(guestBook);
     }
 
+
     @Override
     public List<GuestBook> getAllGuestBooks(String orderDirection, String orderField, int page, int pageSize) {
 
-        //Data Sort에 정렬 위치를 제공한다.
-        Sort.Direction sortDirection = Sort.Direction.DESC;
+        Sort sort = makeSort(orderDirection,orderField);
 
-        //기본 DESC에서 ASC로 설정이 되어있다면 ASC로 Sort.Direction을 변경한다.
-        if (orderDirection.equals("ASC")) {
-            sortDirection = Sort.Direction.ASC;
-        }
-
-        Sort sort = Sort.by(sortDirection, orderField);
-
-        //TODO : sort 위치 정하는 로직은 나중에 하나로 합치기
-        //return this.guestBookRepository.findBy(PageRequest.of(0,5));
         return this.guestBookRepository.findGuestBooksBy(
                 PageRequest
                         .of(page, pageSize, sort));
@@ -66,27 +57,33 @@ public class GuestBookImpl implements GuestBookService {
     @Override
     public List<GuestBook> getGuestBookByWriter(
             String orderDirection, String orderField, String writer, int page, int pageSize) {
-        //TODO : sort 위치 정하는 로직은 나중에 하나로 합치기
+
+        Sort sort = makeSort(orderDirection,orderField);
+
+        return this.guestBookRepository.findGuestBooksByWriter(PageRequest.of(page, pageSize, sort), writer);
+    }
+
+
+    // Sort 클래스 생성
+    private Sort makeSort(String orderDirection, String orderField){
+        //Data Sort에 정렬 위치를 제공한다.
+
         Sort.Direction sortDirection = Sort.Direction.DESC;
 
+        //기본 DESC에서 ASC로 설정이 되어있다면 ASC로 Sort.Direction을 변경한다.
         if (orderDirection.equals("ASC")) {
             sortDirection = Sort.Direction.ASC;
         }
 
-        Sort sort = Sort.by(sortDirection, orderField);
+        // 제목과 작성는 중복될 수 있는 값이니 중복 되는 값 끼리는 생성된 날짜를 기준으로 먼저 정렬한다.
+        // 일종의 그룹이긴한데 이렇게 하는 게 맞나 ㅎㅎ.. Aggregation 을 써야하나...
+        if(orderField.equals("title") || orderField.equals("writer")){
+            return Sort.by(sortDirection, orderField)
+                    .and(Sort.by(sortDirection, "createdTime"));
+        }else {
+            return Sort.by(sortDirection, orderField);
+        }
 
-
-
-
-
-        List<GuestBook> result = this.guestBookRepository.findGuestBooksByWriter(PageRequest.of(page, pageSize, sort), writer);
-
-
-        return result;
-
-//        return this.guestBookRepository.findGuestBooksByWriter(
-//                PageRequest
-//                    .of(page, pageSize, sort), writer);
     }
 
 
