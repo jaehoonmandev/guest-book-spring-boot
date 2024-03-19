@@ -7,14 +7,12 @@ services: # 컨테이너의 이름, 이미지, 포트 등을 정의하여 컨테
     container_name: guest-book-local # 생성될 컨테이너 이름 정의
     image: guest-book-spring-boot-local # 기반이 되는 이미지 지정
     expose:
-      - 18080
+      - 8080
     ports:
-      - ${SPRING_BOOT_PORT_LOCAL}:18080
+      - ${SPRING_BOOT_PORT_LOCAL}:8080
     depends_on: # 의존성 주입으로 해당 서비스가 먼저 생성, 실행된다
-      - mongodb
-    environment: # 환경 변수 설정.
-      - SPRING_DATA_MONGODB_URI=mongodb://jaehoonman:1234@mongodb:27017/guest_book?authSource=admin
-#      - SPRING_DATA_MONGODB_URL=mongodb://mongodb:27017/guest_book?authSource=admin
+      mongodb:
+        condition: service_started
     networks:
       - guest-book
 
@@ -24,9 +22,6 @@ services: # 컨테이너의 이름, 이미지, 포트 등을 정의하여 컨테
     hostname: mongodb
     volumes:
       - ~/mongodb:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=jaehoonman
-      - MONGO_INITDB_ROOT_PASSWORD=1234
     restart: always # 재시작 정책
     command: ["--auth", "--bind_ip", "0.0.0.0"]
     ports:

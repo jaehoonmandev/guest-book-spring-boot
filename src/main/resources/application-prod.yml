@@ -1,8 +1,21 @@
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+    key: jaehoonman
+
 spring:
   data:
     mongodb:
-      uri: mongodb://jaehoonman:1234@mongodb:27017/?authSource=admin
+      #      uri: mongodb://jaehoonman:1234@localhost:27017/?authSource=admin
+      #      uri: mongodb://ENC(4yP4ZN83LdBZbr4VMQrr0daO5aS9lU5V0Mf63ot+tppiOjBY5j+y5bdGypQx6fDG):ENC(6d48Im6hAdyqf8LWqWSiNip081dQ5Mc3qUcSaYiz8d4cziTsIXDZ1voG2w68x2nH)@localhost:27017/?authSource=admin
+      #      uri: mongodb://localhost:27017/?authSource=admin
       database: guest_book
+      username: ENC(uVVl1Rr4GPL9o6V9cjOLT9zUA7EyU2UdZJbBoMKe6uI7GZNFOjOANGYEBNO/gth4)
+      password: ENC(d9rkSgAbXkWUvD4piSzg1A5q7ygkq8tHhKpL8TK+GwK0JHYaG14KHPOZanbRNHzL)
+      authentication-database: admin
+      host: mongodb
+      port: 27017
+
 
 server:
   port: 18080
