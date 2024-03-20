@@ -45,5 +45,5 @@ jobs:
       - name: Docker build & push to docker repo
         run: |
           docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PWD }}
-          docker build -t ${{ secrets.DOCKER_REPO }}/guest-book-spring-boot .
+          docker build -f Dockerfile.prod -t ${{ secrets.DOCKER_REPO }}/guest-book-spring-boot .
           docker push ${{ secrets.DOCKER_REPO }}/guest-book-spring-boot
