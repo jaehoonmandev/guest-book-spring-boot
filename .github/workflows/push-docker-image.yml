@@ -33,7 +33,7 @@ jobs:
         run: |
           cd ./src/main/resources
           touch ./application-prod.yml
-          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.yml
+          echo "${{ secrets.GUEST_BOOK_PROPERTIES_PROD }}" > ./application-prod.yml
         shell: bash
 
       # 권한 부여 + 테스트 제외 빌드
