@@ -6,9 +6,6 @@ jasypt:
 spring:
   data:
     mongodb:
-#      uri: mongodb://jaehoonman:1234@mongodb:27017/guest_book?authSource=admin
-#      uri: mongodb://ENC(4yP4ZN83LdBZbr4VMQrr0daO5aS9lU5V0Mf63ot+tppiOjBY5j+y5bdGypQx6fDG):ENC(6d48Im6hAdyqf8LWqWSiNip081dQ5Mc3qUcSaYiz8d4cziTsIXDZ1voG2w68x2nH)@localhost:27017/?authSource=admin
-#      uri: mongodb://localhost:27017/?authSource=admin
       database: guest_book
       username: ENC(e9o/MQco15mNOF6baawm+rOoF76SXSf72QPVn4G5/Ktb77/HDKu+yvVpfN3lpvgk)
       password: ENC(OvVpePRkS5sr+8yHGFc5ATzrV4l3tBYLF23z40aD818qgrre+O1YiGaSSZEXJWCf)
@@ -18,21 +15,3 @@ spring:
 
 server:
   port: 8080
-#  servlet:
-#    context-path: /guestbook
-#  servlet:
-#    context-path: /api
-
-#  application:
-#    name: GuestBook
-#  cloud:
-#    vault:
-#      token: 00000000-0000-0000-0000-000000000000
-#      scheme: http
-#      kv:
-#        enabled: true
-#      host: localhost
-#      port: 8200
-#  config:
-
-#    import: vault://
