@@ -1,0 +1,18 @@
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+    key: jaehoonman
+
+spring:
+  data:
+    mongodb:
+      database: guest_book
+      username: ENC(uVVl1Rr4GPL9o6V9cjOLT9zUA7EyU2UdZJbBoMKe6uI7GZNFOjOANGYEBNO/gth4)
+      password: ENC(d9rkSgAbXkWUvD4piSzg1A5q7ygkq8tHhKpL8TK+GwK0JHYaG14KHPOZanbRNHzL)
+      authentication-database: admin
+      host: mongodb
+      port: 27017
+
+
+server:
+  port: 18080
