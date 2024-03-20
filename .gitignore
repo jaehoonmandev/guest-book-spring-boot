@@ -6,8 +6,8 @@ build/
 !**/src/test/**/build/
 
 #.env
-#src/test/java/com/jaehoonman/guestbookspringboot/config/JasyptConfigAESTest.java
-#src/main/resources/application-prod.yml
+src/test/java/com/jaehoonman/guestbookspringboot/config/JasyptConfigAESTest.java
+src/main/resources/application-prod.yml
 
 
 ### STS ###
