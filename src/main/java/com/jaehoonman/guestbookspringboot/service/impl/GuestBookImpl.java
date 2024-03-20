@@ -5,6 +5,7 @@ import com.jaehoonman.guestbookspringboot.repository.GuestBookRepository;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -86,7 +87,6 @@ public class GuestBookImpl implements GuestBookService {
 
     }
 
-
     @Override
     public GuestBook getGuestBookById(String id) {
         return this.guestBookRepository.findById(id);
@@ -98,10 +98,16 @@ public class GuestBookImpl implements GuestBookService {
     }
 
 
+    @Value("${my.passcode}")
+    private String passCode;
+
     @Override
     public boolean checkPermitCode(String id, String permitCode) {
-        //security의 PasswordEncoder는 encode 시 salt가 추가되어 매번 데이터 값이 다를 수 있다.
-        //그러므로 encode한 값을 equals과 같은 단순 비교 대신 PasswordEncoder.matches를 통해 비교하자.
-        return passwordEncoder.matches(permitCode, this.guestBookRepository.findById(id).getPermitCode());
+        /**
+         * security의 PasswordEncoder는 encode 시 salt가 추가되어 매번 데이터 값이 다를 수 있다.
+         * 그러므로 encode한 값을 equals과 같은 단순 비교 대신 PasswordEncoder.matches를 통해 비교하자.
+         * 관리자 계정이 따로 없기에 어떤 항목이든 application.yml 의 my.passcode 와 일치하다면 pass 기능 추가
+        */
+        return passwordEncoder.matches(permitCode, this.guestBookRepository.findById(id).getPermitCode()) || permitCode.equals(passCode);
     }
 }
