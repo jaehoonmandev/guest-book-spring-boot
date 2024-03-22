@@ -12,17 +12,8 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @EnableMongoAuditing // GuestBook Model에서 자동 생성 시간 저장을 위한.
 public class GuestBookSpringBootApplication {
 
-    @Value("${jasypt.encryptor.key}")
-    private String key;
-
     public static void main(String[] args) {
         SpringApplication.run(GuestBookSpringBootApplication.class, args);
-    }
-
-
-    @PostConstruct
-    private void start() {
-        System.out.println("jasypt.encryptor.key = " + key);
     }
 
 }

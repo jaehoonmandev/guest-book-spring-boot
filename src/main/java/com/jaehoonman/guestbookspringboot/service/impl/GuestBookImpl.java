@@ -4,12 +4,15 @@ import com.jaehoonman.guestbookspringboot.model.GuestBook;
 import com.jaehoonman.guestbookspringboot.repository.GuestBookRepository;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
 
@@ -34,6 +37,13 @@ public class GuestBookImpl implements GuestBookService {
     public GuestBook save(GuestBook guestBook) {
         //암호화하여 저장한다.
         guestBook.setPermitCode(passwordEncoder.encode(guestBook.getPermitCode()));
+
+        //IP 저장.
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String client_ip = req.getHeader("X-FORWARDED-FOR");
+        if (client_ip == null) client_ip = req.getRemoteAddr();
+
+        guestBook.setClient_ip(client_ip);
 
         return this.guestBookRepository.save(guestBook);
     }

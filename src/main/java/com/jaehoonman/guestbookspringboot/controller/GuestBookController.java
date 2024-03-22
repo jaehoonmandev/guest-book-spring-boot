@@ -2,11 +2,8 @@ package com.jaehoonman.guestbookspringboot.controller;
 
 import com.jaehoonman.guestbookspringboot.model.GuestBook;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
 
@@ -34,12 +31,6 @@ public class GuestBookController {
             @RequestParam(name = "orderField") String orderField,
             @RequestParam(name = "page") int page,
             @RequestParam(name = "pageSize") int pageSize) {
-
-        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String ip = req.getHeader("X-FORWARDED-FOR");
-        if (ip == null)
-            ip = req.getRemoteAddr();
-        System.out.println("Connected IP is : " + ip);
 
         return guestBookService.getAllGuestBooks(orderDirection,orderField,page,pageSize);
     }

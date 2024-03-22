@@ -21,6 +21,8 @@ public class GuestBook {
     private String permitCode;
     private String color;
 
+    private String client_ip;
+
     @CreatedDate
     private Date createdTime;
 
