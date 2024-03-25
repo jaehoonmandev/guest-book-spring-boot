@@ -71,7 +71,7 @@ public class GuestBookImpl implements GuestBookService {
 
         Sort sort = makeSort(orderDirection,orderField);
 
-        return this.guestBookRepository.findGuestBooksByWriterRegex(PageRequest.of(page, pageSize, sort), writer);
+        return this.guestBookRepository.findGuestBooksByWriter(PageRequest.of(page, pageSize, sort), writer);
     }
 
 
