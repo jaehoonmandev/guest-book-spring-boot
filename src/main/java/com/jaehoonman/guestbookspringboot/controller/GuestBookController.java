@@ -82,11 +82,25 @@ public class GuestBookController {
         return guestBookService.modify(updateGuestBook);
     }
 
-    //DELETE HTTP 메서드로 id에 해당하는 데이터 삭제하기.
+    //DELETE HTTP 메서드로 id에 해당하는 데이터 삭제 -> 비활성화 하기
     @DeleteMapping("/{id}")
-    public void deleteGuestBookById(@PathVariable String id){
-        guestBookService.deleteGuestBookById(id);
+    public GuestBook disableGuestBookById(@PathVariable String id){
+
+        GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
+
+        if (updateGuestBook != null) {
+            updateGuestBook.setDisabled(true);
+        }
+
+//        guestBookService.deleteGuestBookById(id);
+
+        return guestBookService.modify(updateGuestBook);
+
+
     }
+    /*public void deleteGuestBookById(@PathVariable String id){
+        guestBookService.deleteGuestBookById(id);
+    }*/
 
 
     /**

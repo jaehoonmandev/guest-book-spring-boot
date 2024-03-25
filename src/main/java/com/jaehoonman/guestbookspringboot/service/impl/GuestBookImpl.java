@@ -102,10 +102,10 @@ public class GuestBookImpl implements GuestBookService {
         return this.guestBookRepository.findById(id);
     }
 
-    @Override
-    public int deleteGuestBookById(String id) {
-        return this.guestBookRepository.deleteById(id);
-    }
+//    @Override
+//    public int deleteGuestBookById(String id) {
+//        return this.guestBookRepository.deleteById(id);
+//    }
 
 
     @Value("${my.passcode}")

@@ -24,7 +24,7 @@ public interface GuestBookService {
     GuestBook getGuestBookById(String id);
 
     //ID 기준 삭제
-    int deleteGuestBookById(String id);
+//    int deleteGuestBookById(String id);
 
     boolean checkPermitCode(String id, String permitCode);
 
