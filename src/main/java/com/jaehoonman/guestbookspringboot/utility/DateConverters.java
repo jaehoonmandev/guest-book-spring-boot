@@ -1,5 +1,6 @@
 package com.jaehoonman.guestbookspringboot.utility;
 
+import lombok.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
@@ -28,7 +29,7 @@ public class DateConverters {
     @ReadingConverter
     public static class StringToDateConverter implements Converter<String, Date> {
         @Override
-        public Date convert(String source) {
+        public Date convert(@NonNull String source) {
             try {
                 return dateFormat.parse(source);
             } catch (ParseException e) {
@@ -41,7 +42,7 @@ public class DateConverters {
     @WritingConverter
     public static class DateToStringConverter implements Converter<Date, String> {
         @Override
-        public String convert(Date source) {
+        public String convert(@NonNull Date source) {
             return dateFormat.format(source);
         }
     }
