@@ -26,24 +26,24 @@ public class DateConverters {
     }
 
     //데이터를 읽을 때 String으로 된 데이터를 Asia/Seoul TimeZone Date로 변경한다.
-    @ReadingConverter
-    public static class StringToDateConverter implements Converter<String, Date> {
-        @Override
-        public Date convert(@NonNull String source) {
-            try {
-                return dateFormat.parse(source);
-            } catch (ParseException e) {
-                return null;
-            }
-        }
-    }
+//    @ReadingConverter
+//    public static class StringToDateConverter implements Converter<String, Date> {
+//        @Override
+//        public Date convert(@NonNull String source) {
+//            try {
+//                return dateFormat.parse(source);
+//            } catch (ParseException e) {
+//                return new Date();
+//            }
+//        }
+//    }
 
     // 저장 시 Date 타입을 Asia/Seoul TimeZone의 Sring으로 저장한다.
-    @WritingConverter
-    public static class DateToStringConverter implements Converter<Date, String> {
-        @Override
-        public String convert(@NonNull Date source) {
-            return dateFormat.format(source);
-        }
-    }
+//    @WritingConverter
+//    public static class DateToStringConverter implements Converter<Date, String> {
+//        @Override
+//        public String convert(@NonNull Date source) {
+//                return dateFormat.format(source);
+//        }
+//    }
 }

@@ -27,10 +27,8 @@ public class GuestBook {
     private String client_ip;
 
     @CreatedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date createdTime;
 
     @LastModifiedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date lastModifiedTime;
 }
