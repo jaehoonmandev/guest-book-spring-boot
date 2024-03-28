@@ -18,7 +18,7 @@ public interface GuestBookRepository extends MongoRepository<GuestBook, Long> {
     List<GuestBook> findGuestBooksBy(Pageable pageable);
 
 
-    @Query("{disabled:{$ne : true}, writer:{$regex: '.*?0.*'}}")
+    @Query("{disabled:{$ne : true}, writer:{$regex: '.*\\\\Q?0\\\\E.*' }}")
     //작성자를 기준으로 데이터를 가져온다.(Like 조회)
     List<GuestBook> findGuestBooksByWriter(Pageable Pageable, String writer);
 
