@@ -104,7 +104,7 @@ public class GuestBookController {
 
 
     /**
-     * 등록된 방명록의 Permit Code와 사용자가 입력한 Permit Code가 같은지 판단한다.
+     * 등록된 방명록의 Permit Code와 사용자가 입력한 Permit Code가 같은지 판단한다.(음 이부분은 RESTful 하지 않은 것 같군!)
      * @param id
      * @return boolean
      */

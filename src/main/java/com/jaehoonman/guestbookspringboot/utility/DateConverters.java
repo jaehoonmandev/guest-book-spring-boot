@@ -13,6 +13,7 @@ import java.util.TimeZone;
 
 /**
  * MongoDB 저장 시간을 UTC -> 한국 시간으로 변경
+ * 날짜를 Data로 다루기 위해서는 MongoDB 의 저장 방식을 따르는게 나을 것 같아서 날짜 변환 수행하지 않도록.
  */
 
 public class DateConverters {
