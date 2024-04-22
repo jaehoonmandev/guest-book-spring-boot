@@ -6,15 +6,15 @@ jasypt:
 spring:
   data:
     mongodb:
-      database: guest_book
+      database: guest_book_tmp
       username: ENC(oxmb/9NkjdkTWNHSga+iEizZZBzba4sv4F+/IIvT5vbNQCRIVvHCSd3CEwkpHBl3)
       password: ENC(cd3hzau0MU/A2P+dlaLkxM+tzs3oXAfsVjZ24KYgvmywZm0ele2DajBBu6zyjW3D)
       authentication-database: admin
-      host: mongodb
+      host: localhost
       port: 27017
 
-my:
-  passcode: local
+#my:
+#  passcode: local
 
 server:
   port: 8080

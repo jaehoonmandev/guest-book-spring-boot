@@ -2,6 +2,7 @@ package com.jaehoonman.guestbookspringboot.controller;
 
 import com.jaehoonman.guestbookspringboot.model.GuestBook;
 import com.jaehoonman.guestbookspringboot.service.GuestBookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/guestbook")
+@Slf4j
 public class GuestBookController {
 
     //서비스 주입
@@ -85,6 +87,8 @@ public class GuestBookController {
     //DELETE HTTP 메서드로 id에 해당하는 데이터 삭제 -> 비활성화 하기
     @DeleteMapping("/{id}")
     public GuestBook disableGuestBookById(@PathVariable String id){
+
+
 
         GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
 
