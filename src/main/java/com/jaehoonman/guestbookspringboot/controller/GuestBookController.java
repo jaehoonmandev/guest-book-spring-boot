@@ -68,39 +68,43 @@ public class GuestBookController {
 
     //PUT 계정 수정.
     @PutMapping("/{id}")
+
     public GuestBook updateGuestBook(@RequestBody GuestBook guestBook,@PathVariable String id) {
 
-        // 아이디에 해당하는 데이터를 찾고 존재한다면
-        GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
+        //permitCode Double-check
+        if(guestBookService.checkPermitCode(id, guestBook.getPermitCode())){
+            // 아이디에 해당하는 데이터를 찾고 존재한다면
+            GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
 
-        // 수정할 데이터들만 입력 받은 데이터로 변경하여 저장한다.
-        if (updateGuestBook != null) {
-            updateGuestBook.setTitle(guestBook.getTitle());
-            updateGuestBook.setWriter(guestBook.getWriter());
-            updateGuestBook.setContents(guestBook.getContents());
-            updateGuestBook.setColor(guestBook.getColor());
+            // 수정할 데이터들만 입력 받은 데이터로 변경하여 저장한다.
+            if (updateGuestBook != null) {
+                updateGuestBook.setTitle(guestBook.getTitle());
+                updateGuestBook.setWriter(guestBook.getWriter());
+                updateGuestBook.setContents(guestBook.getContents());
+                updateGuestBook.setColor(guestBook.getColor());
+            }
+            return guestBookService.modify(updateGuestBook);
         }
-
-        return guestBookService.modify(updateGuestBook);
+        return null;
     }
 
     //DELETE HTTP 메서드로 id에 해당하는 데이터 삭제 -> 비활성화 하기
     @DeleteMapping("/{id}")
-    public GuestBook disableGuestBookById(@PathVariable String id){
+    public GuestBook disableGuestBookById(@RequestBody GuestBook guestBook, @PathVariable String id){
 
+        if(guestBookService.checkPermitCode(id, guestBook.getPermitCode())){
 
+            GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
 
-        GuestBook updateGuestBook = guestBookService.getGuestBookById(id);
-
-        if (updateGuestBook != null) {
-            updateGuestBook.setDisabled(true);
-        }
+            if (updateGuestBook != null) {
+                updateGuestBook.setDisabled(true);
+            }
 
 //        guestBookService.deleteGuestBookById(id);
 
-        return guestBookService.modify(updateGuestBook);
-
-
+            return guestBookService.modify(updateGuestBook);
+        }
+        return null;
     }
     /*public void deleteGuestBookById(@PathVariable String id){
         guestBookService.deleteGuestBookById(id);
@@ -109,7 +113,6 @@ public class GuestBookController {
 
     /**
      * 등록된 방명록의 Permit Code와 사용자가 입력한 Permit Code가 같은지 판단한다.(음 이부분은 RESTful 하지 않은 것 같군!)
-     * @param id
      * @return boolean
      */
     @RequestMapping("/checkPermitCode/{id}")
